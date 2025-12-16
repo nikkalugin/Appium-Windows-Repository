@@ -1,8 +1,8 @@
 export const config = {
     runner: 'local',
-    hostname: 'localhost',
-    port: 4723,
-    path: '/wd/hub',
+    // hostname: '127.0.0.1',
+    // port: 4723,
+    // path: '/',
 
     specs: [
         './test/specs/**/*.js'
@@ -11,20 +11,29 @@ export const config = {
     exclude: [
         // 'path/to/excluded/files'
     ],
-    maxInstances: 10,
+    maxInstances: 1,
     capabilities: [{
-        platformName: 'windows',
+        // platformName: 'Windows',
+        // 'appium:automationName': 'Windows',
+        // 'appium:app': 'C:\\Program Files\\Notepad++\\notepad++.exe',
+        // 'appium:deviceName': 'WindowsPC',
+        // 'appium:platformVersion': '11.0',
+        // 'appium:newCommandTimeout': 300,
+        // 'appium:ms:waitForAppLaunch': 15
+
+        platformName: 'Windows',
         'appium:automationName': 'Windows',
-        'appium:app': 'C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\ShareX',
+        'appium:app': 'C:\\Program Files\\Notepad++\\notepad++.exe',
         'appium:deviceName': 'WindowsPC',
-        'appium:platformVersion': '11.0'
+        'appium:newCommandTimeout': 300,
+        'appium:ms:waitForAppLaunch': 10,
     }],
 
     logLevel: 'info',
     bail: 0,
-    waitforTimeout: 10000,
-    connectionRetryTimeout: 120000,
-    connectionRetryCount: 3,
+    waitforTimeout: 4000,
+    connectionRetryTimeout: 10000,
+    connectionRetryCount: 1,
 
     services: ['appium'],
     framework: 'mocha',
@@ -33,6 +42,10 @@ export const config = {
     mochaOpts: {
         ui: 'bdd',
         timeout: 60000
+    },
+
+    before: async function() {
+        await browser.setWindowSize(1024, 768);
     },
 
     //
